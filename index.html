@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+    <link rel="stylesheet" href="week6.css">
+</head>
+
+<body>
+    <h2>Make an Order!</h2>
+    <form action="#" id="form">
+        <div id="fullpage">
+            Enter First Name: <br>
+            <input type="text" onblur="valid1()" id="fname" name="First name"><span id="message1"></span><br> Last Name: <br>
+            <input type="text" onblur="valid2()" id="lname" name="Last name"><span id="message2"></span><br> Phone number: <br>
+            <input type="text" onblur="valid3()" id="phno" placeholder="xxx-xxx-xxxx" name="Phone Number"><span id="message3"></span><br> Email: <br>
+            <input type="text" onblur="valid4()" id="email" name="Email"><span id="message4"></span><br> Password: <br>
+            <input type="password" onblur="valid5()" name="Password" id="pass"><span id="message5"></span><br> Item price: <br>
+            <input type="number" onblur="valid6()" name="Item Price" id="price" value="10" readonly><span id="message6"></span><br> Quantity: <br>
+            <input type="number" onblur="valid7()" id="quantity" name="Quantity" value="0"><span id="message7"></span><br> <br>
+            <button onclick="calcorder(),callform()" value="Confirm Order">Confirm Order</button>
+            <span id="Confirm1"></span><br>
+            <span id="Confirm2"></span><br>
+            <span id="Confirm3"></span><br>
+            <span id="Confirm4"></span><br>
+            <span id="Confirm5"></span><br><br>
+
+        </div>
+    </form>
+    <script>
+        function valid1() {
+            var fname = document.getElementById("fname").value;
+            var reg = /^[A-aZ-z]{2,15}$/;
+            if (reg.test(fname)) {
+                document.getElementById("message1").style.color = "green";
+                document.getElementById("message1").innerHTML = "Valid";
+            } else {
+                document.getElementById("message1").style.color = "red";
+                document.getElementById("message1").innerHTML = "Invalid";
+            }
+        }
+
+        function valid2() {
+            var lname = document.getElementById("lname").value;
+            var reg = /^[A-aZ-z]{2,15}$/;
+            if (reg.test(lname)) {
+                document.getElementById("message2").style.color = "green";
+                document.getElementById("message2").innerHTML = "Valid";
+            } else {
+                document.getElementById("message2").style.color = "red";
+                document.getElementById("message2").innerHTML = "Invalid";
+            }
+        }
+
+        function valid3() {
+            var phno = document.getElementById("phno").value;
+            var reg = /^\d{3}-\d{3}-\d{4}$/;
+            if (reg.test(phno)) {
+                document.getElementById("message3").style.color = "green";
+                document.getElementById("message3").innerHTML = "Valid";
+            } else {
+                document.getElementById("message3").style.color = "red";
+                document.getElementById("message3").innerHTML = "Invalid";
+            }
+        }
+
+        function calcorder() {
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var user = fname + " " + lname;
+            var phno = document.getElementById("phno").value;
+            var email = document.getElementById("email").value;
+            var item = document.getElementById("price").value;
+            var quantity = document.getElementById("quantity").value;
+            var total = item * quantity;
+            document.getElementById("Confirm1").innerHTML = "<h1>Order Summary: </h1>";
+            document.getElementById("Confirm2").innerHTML = "Name: " + user.toUpperCase();
+            document.getElementById("Confirm3").innerHTML = "Phone Number: " + phno;
+            document.getElementById("Confirm4").innerHTML = "Email ID: " + email;
+            document.getElementById("Confirm5").innerHTML = "Total Amount: " + total;
+        }
+
+        function callform() {
+            var ele = document.getElementById("form").elements;
+            var str = '';
+            for (var i = 0; i < ele.length; i++) {
+                str = str + "Type: " + ele[i].type + "&nbsp;&nbsp";
+                str = str + "Name: " + ele[i].name + "&nbsp;&nbsp";
+                str = str + "Value: " + ele[i].value + "&nbsp;&nbsp <br>";
+            }
+            document.getElementById("formelements").innerHTML = str;
+        }
+    </script>
+    <div id="formelements"></div>
+</body>
+
+</html>
